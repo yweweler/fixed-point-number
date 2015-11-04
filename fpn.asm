@@ -36,6 +36,7 @@ double2fixed:
 ;; 
 ;;  Arguments:
 ;;      - rax: double
+;;      - ecx: 8 Bit integer scale
 ;; 
 ;;  Returns: 64 Bit fixed point number
     
@@ -56,6 +57,7 @@ fixed2double:
 ;; 
 ;;  Arguments:
 ;;      - rax: 64 Bit fixed point number
+;;      - ecx: 8 Bit integer scale
 ;; 
 ;;  Returns: double
 
@@ -77,6 +79,7 @@ int2fixed:
 ;; 
 ;;  Arguments:
 ;;      - rax: 64 Bit integer
+;;      - ecx: 8 Bit integer scale
 ;; 
 ;;  Returns: 64 Bit fixed point number
 
@@ -92,6 +95,7 @@ fixed2int:
 ;; 
 ;;  Arguments:
 ;;      - rax: 64 Bit fixed point number
+;;      - ecx: 8 Bit integer scale
 ;; 
 ;;  Returns: 64 Bit integer
 
@@ -103,6 +107,14 @@ fixed2int:
 
 
 fractorial:           ; n & fracmask
+;;  Return the factorial of x as a fixed point number.
+;;
+;;  Arguments:
+;;      - rax: 64 Bit fixed point number x
+;;      - ecx: 8 Bit integer scale
+;;
+;;  Returns: 64 Bit fixed point number
+
     xor rax, rax
     inc al
     mov ecx, esi
@@ -114,12 +126,14 @@ fractorial:           ; n & fracmask
 
 
 floor:                ; n & floormask
-;;  Return the floor of x as a float,
+;;  Return the floor of x as a fixed point number,
 ;;  the largest integer value less than or equal to x.
 ;;
 ;;  Arguments:
+;;      - rax: 64 Bit fixed point number x
+;;      - ecx: 8 Bit integer scale
 ;;
-;;  Returns:
+;;  Returns: 64 Bit fixed point number
 
     xor rax, rax
     not rax

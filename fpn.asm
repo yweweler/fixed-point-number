@@ -106,7 +106,7 @@ fixed2int:
 ;; ---------------------------------------------------
 
 
-fixed_fractorial      ; n & fracmask
+fixed_fractorial:     ; n & fracmask
 ;;  Return the factorial of x as a fixed point number.
 ;;
 ;;  Arguments:

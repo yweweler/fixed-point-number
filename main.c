@@ -14,8 +14,8 @@ extern long long genfloormask(unsigned char scale);
 extern long long int2fixed(long long n, unsigned char scale);
 extern long long fixed2int(long long n, unsigned char scale);
 
-extern long long fixed_fraction(long long n, unsigned char scale);
-extern long long fixed_floor(long long n, unsigned char scale);
+extern long long fraction(long long n, unsigned char scale);
+extern long long floor(long long n, unsigned char scale);
 
 extern long long double2fixed(double n, unsigned char scale);
 extern double fixed2double(long long n, unsigned char scale);
@@ -35,11 +35,11 @@ int main(int argc, char **argv) {
 	
 	printf("double2fixed(%e, 16) = %lld\n", pi, double2fixed(pi, 16));
 
-	printf("fixed2double(fixed_fraction(double2fixed(%e, 32), 32), 32) = %e\n", pi,
-	    fixed2double(fixed_fraction(double2fixed(pi, 32), 32), 32));
+	printf("fixed2double(fraction(double2fixed(%e, 32), 32), 32) = %e\n", pi,
+	    fixed2double(fraction(double2fixed(pi, 32), 32), 32));
 
-	// printf("fixed2double(fixed_floor(double2fixed(%e, 16), 16), 16) = %e\n\n", pi,
-	// 	fixed2double(fixed_floor(double2fixed(3.141596, 16), 16), 16));
+	printf("fixed2double(floor(double2fixed(%e, 16), 16), 16) = %e\n\n", pi,
+	    fixed2double(floor(double2fixed(3.141596, 16), 16), 16));
 	
     printf("epsilon = %llu\n", genepsilon());
 	printf("fixed2double(epsilon,  2) ASM = %G\n", fixed2double(genepsilon(),  2));

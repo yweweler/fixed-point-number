@@ -110,7 +110,9 @@ fraction:           ; n & fracmask
     dec rax
     and rax, rdi
     ret
-    
+;; ---------------------------------------------------
+
+
 whole:              ; n & wholemask
     xor rax, rax
     not rax
@@ -118,20 +120,37 @@ whole:              ; n & wholemask
     shl rax, cl
     and rax, rdi
     ret
-    
+;; ---------------------------------------------------
+
+
 genepsilon:
+;;  Generate double epsilon as a fixed point number
+;;
+;;  Arguments:
+;;      - al: 64 Bit fixed point number
+
     xor rax, rax
     inc al
     ret
-    
-    
+;; ---------------------------------------------------
+
+
 genshift:
+;;  Generate a mask with only the n'th Bit set
+;;
+;;  Arguments:
+;;      - al: 8 Bit integer scale
+;; 
+;;  Returns: 64 Bit integer mask
+
     xor rax, rax
     mov ecx, edi
     inc al
     shl rax, cl
     ret
-    
+;; ---------------------------------------------------
+
+
 ; --- 64 Bit -----------------------------------------------------
 ; -------8------16------24------32------40------48------56------64
 ;        |       |       |       |       |       |       |       |
@@ -162,16 +181,39 @@ genshift:
 
 
 genfracmask:        ; (1 << scale)-1
+;;  Generate the fraction mask based on a scale
+;;
+;;  Calculation can be done once and reused in every
+;;  fixed point number calculation to enhance speed.
+;;
+;;  Arguments:
+;;      - al: 8 Bit integer scale
+;; 
+;;  Returns: 64 Bit integer mask
+
     xor rax, rax
     inc al
     mov ecx, edi
     shl rax, cl
     dec rax
     ret
-    
+;; ---------------------------------------------------
+
+
 genwholemask:       ; ~0 << scale
+;;  Generate the whole mask based on a scale.
+;;
+;;  Calculation can be done once and reused in every
+;;  fixed point number calculation to enhance speed.
+;;
+;;  Arguments:
+;;      - al: 8 Bit integer scale
+;;
+;;  Returns: 64 Bit integer mask
+
     xor rax, rax
     not rax
     mov ecx, edi
     shl rax, cl
     ret
+;; ---------------------------------------------------

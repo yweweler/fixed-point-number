@@ -15,8 +15,8 @@ section .text
 ;    int64 fraction(int64 n, int8 scale)
     global fraction        
 
-;    int64 whole(int64 n, int8 scale)
-    global whole           
+;    int64 floor(int64 n, int8 scale)
+    global floor           
 
 ;    int64 genepsilon()
     global genepsilon      
@@ -27,8 +27,8 @@ section .text
 ;    int64 genfracmask(int8 scale)
     global genfracmask     
 
-;    int64 genwholemask(int8 scale)
-    global genwholemask    
+;    int64 genfloormask(int8 scale)
+    global genfloormask    
     
 
 double2fixed:
@@ -102,7 +102,7 @@ fixed2int:
 ;; ---------------------------------------------------
 
 
-fraction:           ; n & fracmask
+fractorial:           ; n & fracmask
     xor rax, rax
     inc al
     mov ecx, esi
@@ -113,7 +113,14 @@ fraction:           ; n & fracmask
 ;; ---------------------------------------------------
 
 
-whole:              ; n & wholemask
+floor:                ; n & floormask
+;;  Return the floor of x as a float,
+;;  the largest integer value less than or equal to x.
+;;
+;;  Arguments:
+;;
+;;  Returns:
+
     xor rax, rax
     not rax
     mov ecx, esi
@@ -200,8 +207,8 @@ genfracmask:        ; (1 << scale)-1
 ;; ---------------------------------------------------
 
 
-genwholemask:       ; ~0 << scale
-;;  Generate the whole mask based on a scale.
+genfloormask:       ; ~0 << scale
+;;  Generate the floor mask based on a scale.
 ;;
 ;;  Calculation can be done once and reused in every
 ;;  fixed point number calculation to enhance speed.

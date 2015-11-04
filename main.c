@@ -1,10 +1,9 @@
 #include <stdio.h>
 #include <stdint.h>
 
-// extern int heming_dist(int, int);
-// 
-// extern void build_stack_frame_manual();
-// extern void build_stack_frame_auto();
+extern int heming_dist(int, int);
+extern void build_stack_frame_manual();
+extern void build_stack_frame_auto();
 
 extern long long genepsilon();
 extern long long genshift(unsigned char scale);
@@ -26,11 +25,9 @@ int main(int argc, char **argv) {
 
 	printf("<<< x64 ASM Sandbox >>>\n\n");
 
-	// debug("heming distance of 2783, 1552", -1, hemming_dist(2783, 1552));
-
-	// /* ~25% faster then a enter/leave */
-	// build_stack_frame_manual();		
-	// build_stack_frame_auto();
+	printf("heming distance of 2783, 1552 is %d\n\n", hemming_dist(2783, 1552));
+	build_stack_frame_manual();		
+	build_stack_frame_auto();
 	
 	
 	printf("double2fixed(%e, 16) = %lld\n", pi, double2fixed(pi, 16));

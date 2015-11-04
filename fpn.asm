@@ -12,11 +12,11 @@ section .text
 ;    int64 fixed2int(int64 n, int8 scale)
     global fixed2int
 
-;    int64 fraction(int64 n, int8 scale)
-    global fraction        
+;    int64 fixed_fraction(int64 n, int8 scale)
+    global fixed_fraction        
 
-;    int64 floor(int64 n, int8 scale)
-    global floor           
+;    int64 fixed_floor(int64 n, int8 scale)
+    global fixed_floor           
 
 ;    int64 genepsilon()
     global genepsilon      
@@ -106,7 +106,7 @@ fixed2int:
 ;; ---------------------------------------------------
 
 
-fractorial:           ; n & fracmask
+fixed_fractorial      ; n & fracmask
 ;;  Return the factorial of x as a fixed point number.
 ;;
 ;;  Arguments:
@@ -125,7 +125,7 @@ fractorial:           ; n & fracmask
 ;; ---------------------------------------------------
 
 
-floor:                ; n & floormask
+fixed_floor:          ; n & floormask
 ;;  Return the floor of x as a fixed point number,
 ;;  the largest integer value less than or equal to x.
 ;;
